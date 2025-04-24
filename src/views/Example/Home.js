@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router";
 import Color from "../HOC/color";
+import logo from "../../assets/images/logoChannel.png";
 class Home extends React.Component {
   // componentDidMount() {
   //   setTimeout(() => {
@@ -9,7 +10,22 @@ class Home extends React.Component {
   // }
   render() {
     console.log(">>> check props: ", this.props);
-    return <div>hello</div>;
+    return (
+      <>
+        <div>hello</div>
+        <div>
+          <img
+            src={logo}
+            style={{
+              width: "400px",
+              height: "400px",
+              marginTop: "10px",
+              borderRadius: "50%",
+            }}
+          />
+        </div>
+      </>
+    );
   }
 }
 
