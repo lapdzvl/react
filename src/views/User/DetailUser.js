@@ -9,11 +9,19 @@ class DetailUser extends React.Component {
   async componentDidMount() {
     if (this.props.match && this.props.match.params) {
       let id = this.props.match.params.id;
-      let res = await axios.get(`https://reqres.in/api/users/${id}`);
-      this.setState({
-        user: res && res.data && res.data.data ? res.data.data : {},
-      });
-      console.log(">>> check res user: ", res);
+      try {
+        let res = await axios.get(`https://reqres.in/api/users/${id}`, {
+          headers: {
+            "x-api-key": "reqres-free-v1",
+          },
+        });
+        this.setState({
+          user: res?.data?.data || {},
+        });
+        console.log(">>> check res user: ", res);
+      } catch (error) {
+        console.error("❌ Lỗi khi fetch user:", error);
+      }
     }
   }
 

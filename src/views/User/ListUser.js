@@ -7,10 +7,20 @@ class ListUser extends React.Component {
     listUsers: [],
   };
   async componentDidMount() {
-    let res = await axios.get("https://reqres.in/api/users?page=2");
-    this.setState({
-      listUsers: res && res.data && res.data.data ? res.data.data : [],
-    });
+    try {
+      const response = await fetch("https://reqres.in/api/users?page=2", {
+        headers: {
+          "x-api-key": "reqres-free-v1",
+        },
+      });
+      const data = await response.json();
+      console.log("✅ Dữ liệu fetch được:", data);
+      this.setState({
+        listUsers: data?.data || [],
+      });
+    } catch (error) {
+      console.error("❌ Lỗi fetch bằng fetch():", error);
+    }
   }
 
   handleViewDetailUser = (user) => {
